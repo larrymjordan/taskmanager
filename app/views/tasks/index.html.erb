@@ -14,8 +14,8 @@
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.name %></td>
-        <td><%= task.user_id %></td>
-        <td><%= task.state %></td>
+        <td><%= task.user.name + " " + task.user.lastname %></td>
+        <td><%= task.state ? "Terminada" : "No terminada" %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

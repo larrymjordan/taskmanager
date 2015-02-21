@@ -7,12 +7,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @task.user_id %>
+  <%= @task.user.name + " " + @task.user.lastname %>
 </p>
 
 <p>
   <strong>State:</strong>
-  <%= @task.state %>
+  <%= @task.state ? "Terminada" : "No terminada" %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
