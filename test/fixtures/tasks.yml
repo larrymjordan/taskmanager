@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  user_id: 1
+  user: one
   state: false
 
 two:
   name: MyString
-  user_id: 1
+  user: two
   state: false

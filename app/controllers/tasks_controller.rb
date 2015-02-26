@@ -72,7 +72,7 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :user_id, :state)
     end
-    
+
     def get_users
     @users= User.order("lastname").map { |user| [user.name+' '+user.lastname,user.id]}
     end
