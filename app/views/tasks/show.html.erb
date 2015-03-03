@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @task.name %>
@@ -12,7 +10,7 @@
 
 <p>
   <strong>State:</strong>
-  <%= @task.state ? "Terminada" : "No terminada" %>
+  <span class="<%= @task.state ? 'success' : 'alert'%> round label"><%= @task.state ? "Terminada" : "No terminada" %></span>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |

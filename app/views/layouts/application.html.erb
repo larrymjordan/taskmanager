@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    
+
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
@@ -22,7 +22,7 @@
          <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
       </ul>
-    
+
       <section class="top-bar-section">
         <ul class="right">
           <% if user_signed_in? %>
@@ -30,19 +30,26 @@
                   <%= link_to current_user.name, edit_user_registration_path %>
               </li>
               <li>
-                  <%= link_to 'Sing Out', destroy_user_session_path, method: :delete %>
+                  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
               </li>
           <% else%>
-              <li class="active">
-                  <%= link_to 'Sing Up', new_user_registration_path %>
-              </li>
               <li>
-                  <%= link_to 'Sing In', new_user_session_path %>
+                  <%= link_to 'Sign Up', new_user_registration_path %>
+              </li>
+              <li class="active">
+                  <%= link_to 'Sign In', new_user_session_path %>
               </li>
           <% end%>
         </ul>
       </section>
     </nav>
+
+    <% flash.each do |name, msg| %>
+      <div data-alert class="alert-box <%= name %>">
+        <%= msg %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
 
     <div class="row">
       <div class="columns large-12">
