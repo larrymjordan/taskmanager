@@ -4,6 +4,7 @@ one:
   name: Pedro
   lastname: Perez
   email: pperez@uninorte.edu.co
+  encrypted_password: $2a$10$vKWIMJnG9YaIKUKQlCQQN.J.u8pCuC8DayblPS2TTXUz2lKq0C6PS
 
 two:
   name: Juan
