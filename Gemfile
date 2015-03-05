@@ -38,7 +38,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 gem 'devise'
 gem 'foundation-rails','~>5.4.5'
