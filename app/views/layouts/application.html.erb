@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Task Manager" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,8 +12,60 @@
   </head>
 
   <body>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1>
+            <%= link_to root_path do %>
+              <%= image_tag('home.png') %> Home
+            <% end %>
+          </h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
 
-    <%= yield %>
+      <section class="top-bar-section">
+        <ul class="right">
+          <% if user_signed_in? %>
+              <li class="active">
+                  <%= link_to edit_user_registration_path do %>
+                    <%= image_tag('user.png') %> <%= current_user.name %>
+                  <% end %>
+              </li>
+              <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <%= image_tag('logout.png') %> Sign Out
+                  <% end %>
+              </li>
+          <% else%>
+              <li>
+                  <%= link_to new_user_registration_path do %>
+                    <%= image_tag('signup.png') %> Sign Up
+                  <% end %>
+              </li>
+              <li class="active">
+                  <%= link_to new_user_session_path do %>
+                    <%= image_tag('signin.png') %> Sign in
+                  <% end %>
+              </li>
+          <% end%>
+        </ul>
+      </section>
+    </nav>
+
+    <% flash.each do |name, msg| %>
+      <div data-alert class="alert-box <%= name %>">
+        <%= msg %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="columns large-12">
+        <%= yield %>
+      </div>
+    </div>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

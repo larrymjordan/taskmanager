@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :get_users, only: [:new, :edit]
+  before_action :authenticate_user!
+
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.order('created_at DESC')
+    @tasks = current_user.tasks.order('created_at DESC')
   end
 
   # GET /tasks/1
@@ -26,7 +27,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.user = current_user
     respond_to do |format|
       if @task.save
         format.html { redirect_to @task, notice: 'Task was successfully created.' }
@@ -70,10 +71,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :user_id, :state)
-    end
-
-    def get_users
-    @users= User.order("lastname").map { |user| [user.name+' '+user.lastname,user.id]}
+      params.require(:task).permit(:name, :state)
     end
 end

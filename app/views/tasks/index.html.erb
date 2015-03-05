@@ -1,4 +1,4 @@
-<h1>Listing tasks</h1>
+<h2>Tasks</h2>
 
 <table>
   <thead>
@@ -15,15 +15,31 @@
       <tr>
         <td><%= link_to task.name, task %></td>
         <td><%= task.user.name + " " + task.user.lastname %></td>
-        <td><span class="<%= state_class_for task %>"><%= state_description_for task %></span></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <span class="<%= task.state ? 'success' : 'alert'%> round label"><%= task.state ? "Terminada" : "No terminada" %></span>
+        </td>
+        <td>
+          <%= link_to task do %>
+            <%= image_tag('show.png') %> Show &nbsp;&nbsp;&nbsp;
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to edit_task_path(task) do%>
+            <%= image_tag('edit.png') %> Edit &nbsp;&nbsp;&nbsp;
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= image_tag('delete.png') %> Destroy &nbsp;&nbsp;&nbsp;
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Task', new_task_path %>
-<%= link_to 'Users', users_path %>
+<%= link_to new_task_path, class: 'button radius tiny' do %>
+  <%= image_tag('add.png') %> New Task
+<% end %>
