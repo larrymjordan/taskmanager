@@ -3,7 +3,7 @@ machine:
     America/Bogota
 deployment:
   production:
-    branch: production
+    branch: master
     commands:
       - git push git@heroku.com:taskmanager.git $CIRCLE_SHA1:refs/heads/master
       - heroku run rake db:migrate --app taskmanager:
