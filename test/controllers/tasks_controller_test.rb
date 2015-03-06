@@ -3,7 +3,6 @@ require 'test_helper'
 class TasksControllerTest < ActionController::TestCase
   setup do
     @task = tasks(:two)
-    #sign_in users(:two)
   end
 
   test "should get index" do
@@ -12,21 +11,20 @@ class TasksControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:tasks)
   end
-  
-  test "deberia ser redirigido a la pagina de login si no esta autenticado" do
-    
+
+  test "should be redirected to login if user is not logged in" do
     get :new
     assert_response :redirect
     assert_redirected_to new_user_session_path
   end
-  
+
   test "should get new when user is logged in" do
     sign_in users(:one)
     get :new
     assert_response :success
   end
-  
-  test "shouldn´t create task without login" do
+
+  test "shouldn't create task without login" do
     assert_no_difference('Task.count') do
       post :create, task: { name: @task.name, state: @task.state, user_id: @task.user_id }
     end
@@ -34,8 +32,8 @@ class TasksControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to new_user_session_path
   end
-  
-  
+
+
 
   test "should get new" do
     sign_in users(:one)
