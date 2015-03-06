@@ -15,7 +15,9 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    #@task = Task.new
+    @task = current_user.tasks.new
+    
   end
 
   # GET /tasks/1/edit
@@ -28,13 +30,15 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user = current_user
     respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+      
+        if @task.save
+          format.html { redirect_to @task, notice: 'Task was successfully created.' }
+          format.json { render :show, status: :created, location: @task }
+        else
+          format.html { render :new }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
+      
     end
   end
 
@@ -42,13 +46,16 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+      
+        if @task.update(task_params)
+          format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+          format.json { render :show, status: :ok, location: @task }
+        else
+          format.html { render :edit }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
+      
+      
     end
   end
 
@@ -72,4 +79,6 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :state)
     end
+    
+    
 end
