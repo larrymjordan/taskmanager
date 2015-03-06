@@ -2,9 +2,20 @@ require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
 
-  test "requires user_id not to be blank" do
-    t = Task.new(name: 'Another simple task')
-    assert_not t.save
-    assert_equal t.errors.messages[:user_id].first, "can't be blank"
-  end
+  test "que el task no se guarde vacio" do
+     task = Task.new
+     assert !task.save
+   end
+
+   test "que el task no se guarde sin usuario" do
+     task = Task.new
+     task.name = 'Tarea1'
+     assert_not task.save
+   end
+
+   test "que el task no se guarde sin nombre" do
+     task = Task.new
+     task.user_id = tasks(:one).user_id
+     assert_not task.save
+   end
 end
